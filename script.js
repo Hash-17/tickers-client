@@ -1,8 +1,11 @@
 const tickerTable = document.getElementById("tickerTable");
 const bestPriceElement = document.getElementById("bestPrice");
+const loader = document.getElementsByClassName("scaling-dots")[0];
+const mainSec = document.getElementsByClassName("main__sec")[0];
 
 async function fetchAllTickers() {
   console.log("Hello");
+  loader.classList.add("show");
   try {
     const response = await axios.get(
       "https://tickers-server.onrender.com/tickers"
@@ -36,6 +39,9 @@ async function fetchAllTickers() {
     bestPriceElement.textContent = `₹ ${bestPrice}`;
   } catch (error) {
     console.error("Error fetching tickers:", error);
+  } finally {
+    loader.classList.remove("show");
+    mainSec.classList.add("show");
   }
 }
 
