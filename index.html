@@ -8,21 +8,37 @@
   </head>
   <body>
     <header>
-      <h1>Crypto Dashboard</h1>
+      <div class="logo">HODLINFO</div>
+      <div class="currency-switch">
+        <button>INR</button>
+        <button>BTC</button>
+        <button>Buy BTC</button>
+      </div>
     </header>
     <main>
+      <div class="stats">
+        <div class="stat">0.91%<br />5 Mins</div>
+        <div class="stat">1.26%<br />1 Hour</div>
+        <div class="price">
+          <div>Best Price to Trade</div>
+          <div id="bestPrice">₹ 51,66,602</div>
+          <div>Average BTC/INR net price including commission</div>
+        </div>
+        <div class="stat">9.71%<br />1 Day</div>
+        <div class="stat">13.13%<br />7 Days</div>
+      </div>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Base Unit</th>
-            <th>Last Price</th>
-            <th>Volume</th>
-            <th>Buy Price</th>
-            <th>Sell Price</th>
+            <th>#</th>
+            <th>Platform</th>
+            <th>Last Traded Price</th>
+            <th>Buy / Sell Price</th>
+            <th>Difference</th>
+            <th>Savings</th>
           </tr>
         </thead>
-        <tbody id="ticker-table"></tbody>
+        <tbody id="tickerTable"></tbody>
       </table>
     </main>
     <script src="script.js"></script>

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"npm run serve\" \"npm run client\"",
     "serve": "cd ../server && npm start",
-    "client": "http-server public -p 3000"
+    "client": "http-server -p 3000"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",

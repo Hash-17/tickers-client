@@ -1,18 +1,40 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const response = await fetch("http://localhost:7000/tickers");
-  const data = await response.json();
-  const tickerTable = document.getElementById("ticker-table");
+  const tickerTable = document.getElementById("tickerTable");
+  const bestPriceElement = document.getElementById("bestPrice");
 
-  data.data.forEach((ticker) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-            <td>${ticker.name}</td>
-            <td>${ticker.base_unit}</td>
-            <td>${ticker.last}</td>
-            <td>${ticker.volume}</td>
-            <td>${ticker.buy}</td>
-            <td>${ticker.sell}</td>
+  async function fetchAllTickers() {
+    try {
+      const response = await fetch("http://localhost:7000/tickers");
+      const data = await response.json();
+
+      let bestPrice = 0;
+      let bestPlatform = "";
+
+      data.data.forEach((ticker, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${ticker.name}</td>
+          <td>₹ ${ticker.last}</td>
+          <td>₹ ${ticker.buy} / ₹ ${ticker.sell}</td>
+          <td>${(((ticker.sell - ticker.buy) / ticker.buy) * 100).toFixed(
+            2
+          )}%</td>
+          <td>₹ ${(ticker.sell - ticker.buy).toFixed(2)}</td>
         `;
-    tickerTable.appendChild(row);
-  });
+        tickerTable.appendChild(row);
+
+        if (parseFloat(ticker.last) > bestPrice) {
+          bestPrice = parseFloat(ticker.last);
+          bestPlatform = ticker.name;
+        }
+      });
+
+      bestPriceElement.textContent = `₹ ${bestPrice}`;
+    } catch (error) {
+      console.error("Error fetching tickers:", error);
+    }
+  }
+
+  await fetchAllTickers();
 });
