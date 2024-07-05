@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function fetchAllTickers() {
     try {
-      const response = await fetch("http://localhost:7000/tickers");
+      const response = await fetch(
+        "https://tickers-server.onrender.com/tickers"
+      );
       const data = await response.json();
 
       let bestPrice = 0;
