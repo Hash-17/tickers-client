@@ -8,7 +8,7 @@ async function fetchAllTickers() {
   loader.classList.add("show");
   try {
     const response = await axios.get(
-      "https://tickers-server.onrender.com/tickers"
+      "https://tickers-server-2.onrender.com/tickers"
     );
     const data = response.data;
     console.log(data);
